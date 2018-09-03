@@ -53,8 +53,8 @@ class SESAdapter {
         } catch (e) {
             throw new Error(
                 `error while sending verification email to ${
-                    user.objectId
-                } - ${e}`
+                    params.user.objectId
+                } - ${e.message || e}`
             );
         }
     }
@@ -70,8 +70,8 @@ class SESAdapter {
         } catch (e) {
             throw new Error(
                 `error while sending password reset email to ${
-                    user.objectId
-                } - ${e}`
+                    params.user.objectId
+                } - ${e.message || e}`
             );
         }
     }
@@ -86,7 +86,9 @@ class SESAdapter {
 
             return res;
         } catch (e) {
-            throw new Error(`error while sending email to ${to} - ${e}`);
+            throw new Error(
+                `error while sending email to ${to} - ${e.message || e}`
+            );
         }
     }
 }
